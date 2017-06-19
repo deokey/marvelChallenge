@@ -12,13 +12,13 @@ nav,footer {
   background-color: #2D2727 !important;
 }
 
-body {
+main {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
 }
 
-main {
+#main {
   flex: 1 0 auto;
   background-color: #F4F4F4
 }
@@ -40,6 +40,10 @@ main {
   display: flex;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .align-center {
   align-items: center;
 }
@@ -51,3 +55,76 @@ main {
 .justify-between {
   justify-content: space-between;
 }
+
+.justify-space {
+  justify-content: space-around;
+}
+
+.card {
+  width: 45%;
+  margin-bottom: 3rem !important; 
+}
+
+.card-title {
+  font-weight: bolder !important;
+  position: relative !important;
+  top: -18px !important;
+}
+
+.card-description {
+  position: relative !important;
+  top: -18px !important;
+}
+
+.circle {
+  border-radius: 50% !important;
+}
+
+.card-image img {
+    left: -20px !important;
+    top: -20px !important;
+    height: 170px !important;
+    width: 170px !important;
+    max-height: 170px !important;
+    max-width: 170px !important;
+}
+
+.shadow { 
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.main-container {
+  margin-top: 5rem; 
+}
+
+.collapsible {
+  margin: 0 !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.collapsible-header {
+    position: relative;
+    width: 10rem;
+    right: 45px;
+    bottom: 40px;
+    float: right;
+    text-decoration: none;
+    color: #fff;
+    background-color: red;
+    text-align: center;
+    letter-spacing: .5px;
+    transition: .2s ease-out;
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    min-height: inherit !important;
+    -webkit-tap-highlight-color: transparent;
+}
+

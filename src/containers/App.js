@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Hero from '../components/Hero';
+import Footer from '../components/Footer';
 
 class App extends Component {
 
@@ -39,7 +40,7 @@ class App extends Component {
                 if (characters.data.results.length > 0) {
                     this.setState({ characters: characters.data.results})
                 } else {
-                    this.setState({ characters: ['buscando'] })
+                    this.setState({ characters: ['Searching...'] })
                 }
             });
         }
@@ -57,6 +58,7 @@ class App extends Component {
                 name={character.name}
                 description={character.description}
                 thumbnail={character.thumbnail}
+                comics={character.comics}
                 />
             );
             return characterComponent;
@@ -80,20 +82,19 @@ class App extends Component {
                         </form>
                     </div>
                 </nav>
-                <div className="section no-padding">
+                <section id="main" className="section no-padding">
+                    <div className="container main-container">
                     <div className="row">
-                    <div className="container">
-                        <div className="col s12 m9">
-                            <div className="row">
-                                { this.renderCharacters() }
-                            </div>
+                        <div className="col s12 m9 no-padding display-flex flex-wrap justify-between">
+                            { this.renderCharacters() }
                         </div>
 
                         <div className="col s12 m3 favorites-col">
                         </div>
                     </div>
                     </div>
-                </div>
+                </section>
+                <Footer/>
                     
             </main>
         );
