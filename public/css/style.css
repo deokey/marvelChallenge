@@ -1,0 +1,53 @@
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+
+
+nav,footer {
+  background-color: #2D2727 !important;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+  background-color: #F4F4F4
+}
+
+.logo {
+  width: 100%;
+  max-width: 8rem;
+}
+
+.footer-copyright {
+  padding: 2rem 0rem !important;
+}
+
+.favorites-col {
+  background-color: #EBEBEB ;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
