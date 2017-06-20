@@ -63,7 +63,7 @@ class App extends Component {
             );
             return characterComponent;
         } else {
-            return <div> EMPTY SEARCH </div>;
+            return <div></div>;
         }
     }
 
@@ -83,13 +83,22 @@ class App extends Component {
                     </div>
                 </nav>
                 <section id="main" className="section no-padding">
-                    <div className="container main-container">
+                    <div className="container">
                     <div className="row">
+                        
                         <div className="col s12 m9 no-padding display-flex flex-wrap justify-between">
+                            <div className="display-flex align-center main-container">
+                                <img src="public/assetics/icons/characters.png" alt=""/>
+                                <h3 className="no-margin">Characters</h3>
+                            </div>
                             { this.renderCharacters() }
                         </div>
 
                         <div className="col s12 m3 favorites-col">
+                            <div className="display-flex align-center  main-container">
+                                <img src="public/assetics/icons/favourites.png" alt=""/>
+                                <h4>My Favourites</h4>
+                            </div>
                         </div>
                     </div>
                     </div>

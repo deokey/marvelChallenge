@@ -63,7 +63,13 @@ main {
 .card {
   width: 45%;
   margin-bottom: 3rem !important; 
+  margin-top: 2rem !important;
 }
+
+.card:nth-child(1), .card:nth-child(2) {
+  margin-top: 2rem !important;
+}
+
 
 .card-title {
   font-weight: bolder !important;
@@ -94,7 +100,7 @@ main {
 }
 
 .main-container {
-  margin-top: 5rem; 
+  margin-top: 2rem; 
 }
 
 .collapsible {

@@ -30,10 +30,11 @@ class Hero extends Component {
             this.setState({ comic: ['Searching...'] });
             }
         }); 
+        //  debugger;
     }
 
     renderComics() {
-        debugger;
+        // debugger;
         if(this.state !== null && this.state.comic.length > 0 ) {
             
             const comicThings = this.state.comic.map( comicContainer => {
