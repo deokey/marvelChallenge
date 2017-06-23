@@ -78,7 +78,6 @@ class App extends Component {
     renderCharacters() {
 
         const characters = this.state.characters;
-        let comicId;
         console.log(characters);
         if(characters.length > 0) {
             const characterComponent = characters.map((character) => 
@@ -89,7 +88,7 @@ class App extends Component {
                 thumbnail={character.thumbnail}
                 comics={character.comics}
                 comicsId = {character.comics.items.slice(0, 4).map((comic) => {
-                    return comicId = comic.resourceURI.substring(comic.resourceURI.lastIndexOf('/') + 1);
+                    return comic.resourceURI.substring(comic.resourceURI.lastIndexOf('/') + 1);
                 })}
                 />
             );
