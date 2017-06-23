@@ -17,7 +17,14 @@ module.exports = {
     loaders: [
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.png$/, loader: 'url' },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loaders: [
+            'file-loader?hash=sha512&digest=hex&name=[hash].[ext]',
+            'image-webpack-loader?bypassOnDebug&optimizationLevel=7&interlaced=false'
+        ]
+      },
+      { test: /\.json$/, loader:'file-loader', exclude: /node_modules/ }
     ]
   },
   plugins: [HtmlWebpackPluginConfig]

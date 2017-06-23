@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Collapsible, CollapsibleItem, Modal, Button } from 'react-materialize';
+import comicJson from '../mocks/comic.json';  
 
 class Hero extends Component {
     constructor(props) {
@@ -64,7 +65,7 @@ class Hero extends Component {
                         <CollapsibleItem header='View More'>
                             { this.props.comics.items.slice(0, 3).map((comic, i) => {
                                 return (
-                                    <Modal key={i} header={ comic.name } fixedFooter trigger={ <a className="" onClick={this.handleOnClick(comic.resourceURI)}> { comic.name } </a>}>
+                                    <Modal key={i} header={ comic.name } fixedFooter trigger={ <a className="col s6" onClick={this.handleOnClick(comic.resourceURI)}> { comic.name } </a>}>
                                         <div>
                                             {this.renderComics()}    
                                         </div>
