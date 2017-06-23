@@ -1,0 +1,12 @@
+# npm stuff
+node_modules*
+npm-debug.log*
+
+# deploy stuff
+*.pem
+*.zip
+
+# misc
+.DS_Store
+*.m4a
+*.chrome
