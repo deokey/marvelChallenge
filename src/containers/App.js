@@ -15,10 +15,16 @@ class App extends Component {
             search: '',
             characters: [],
             comics: [],
+            cardSelected: {
+                isSelected: false,
+                characterId: ''
+            }
         };
 
         this.handleOnChange = this.handleOnChange.bind(this);
-        this.handleOnClic = this.handleOnClic.bind(this);
+        this.handleOnClick = this.handleOnClick.bind(this);
+        // this.handleOnSelect = this.handleOnSelect.bind(this);
+        // this.handleUnSelected = this.handleUnSelected.bind(this);
     }
 
     handleOnChange(event) {
@@ -26,32 +32,53 @@ class App extends Component {
         this.setState({ search: value });
     }
 
-    handleOnClic() {
+    handleOnClick() {
+        //for testing
+        const value = characterJson;
+        this.setState({ characters: value.data.results})
+        
+        
 
-        const value = this.state.search;
+        //for production
+        // const value = this.state.search;
 
-        if( value !== '' || value !== null ) {
+        // if( value !== '' || value !== null ) {
 
-            fetch(`${apiUrl}/characters?nameStartsWith=${value}&limit=${limit}&apikey=${key}&hash=${hash}&ts=${ts}`)
-            .then(response => {
-                if(response.code >= 400) {
-                    throw new Error('Bad response from server')
-                }
-                return response.json();
-            })
-            .then( (characters) => {
-                if (characters.data.results.length > 0) {
-                    this.setState({ characters: characters.data.results})
-                } else {
-                    this.setState({ characters: ['Searching...'] })
-                }
-            });
-        }
+        //     fetch(`${apiUrl}/characters?nameStartsWith=${value}&limit=${limit}&apikey=${key}&hash=${hash}&ts=${ts}`)
+        //     .then(response => {
+        //         if(response.code >= 400) {
+        //             throw new Error('Bad response from server')
+        //         }
+        //         return response.json();
+        //     })
+        //     .then( (characters) => {
+        //         if (characters.data.results.length > 0) {
+        //             this.setState({ characters: characters.data.results})
+        //         } else {
+        //             this.setState({ characters: ['Searching...'] })
+        //         }
+        //     });
+        // }
     }
+
+    // handleOnSelect(event) {
+    //     event.preventDefault();
+    //     this.setState({ cardSelected: { isSelected: true } });
+    // }
+
+    // handleUnSelected(id) {
+    //      this.setState({ cardSelected:
+    //           { 
+    //               isSelected: this.state.cardSelected.isSelected,
+    //               characterId: id
+    //            }
+    //          });
+    // }
 
     renderCharacters() {
 
         const characters = this.state.characters;
+        let comicId;
         console.log(characters);
         if(characters.length > 0) {
             const characterComponent = characters.map((character) => 
@@ -61,6 +88,9 @@ class App extends Component {
                 description={character.description}
                 thumbnail={character.thumbnail}
                 comics={character.comics}
+                comicsId = {character.comics.items.slice(0, 4).map((comic) => {
+                    return comicId = comic.resourceURI.substring(comic.resourceURI.lastIndexOf('/') + 1);
+                })}
                 />
             );
             return characterComponent;
@@ -70,7 +100,6 @@ class App extends Component {
     }
 
     render() {
-        console.log(characterJson);
         return (
             <main>
                 <nav>
@@ -79,7 +108,7 @@ class App extends Component {
                             <a id="logo-container" href="#" className="col s2 display-flex align-center justify-center"><img className="logo" src="public/assetics/logo-marvel.png"/></a>
                             <div className="input-field col s10 no-padding">
                                 <input id="search" onChange={this.handleOnChange} value={this.state.search} type="search" placeholder="Search character..." required/>
-                                <label className="label-icon" htmlFor="search"><i className="material-icons" onClick={ this.handleOnClic }>search</i></label>
+                                <label className="label-icon" htmlFor="search"><i className="material-icons" onClick={ this.handleOnClick }>search</i></label>
                                 <i className="material-icons">close</i>
                             </div>
                         </form>

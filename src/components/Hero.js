@@ -6,48 +6,51 @@ class Hero extends Component {
     constructor(props) {
         super(props);
 
-        this.handleOnClick = this.handleOnClick.bind(this);
+        this.state = {
+            card: {
+                comicsId: this.props.comicsId ,
+            }
+        };
+
+        // this.handleOnClick = this.handleOnClick.bind(this);
         this.renderComics = this.renderComics.bind(this);
     }
     
-    handleOnClick ( url ) {
-        const key = 'e767071f1c07f6bb06985528dc9c2ac9';
-        const hash = '8794c644644b0b75980c2ed1fce085f1';
-        const ts = '1';
-        const apiUrl = 'https://gateway.marvel.com/v1/public';
-        const comicId = url.substring(url.lastIndexOf('/') + 1);
- 
-        fetch(`${apiUrl}/comics/${comicId}?apikey=${key}&hash=${hash}&ts=${ts}`)
-        .then(response => {
-            if(response.code >= 400) {
-            throw new Error('Bad response from server')
-            }
-            return response.json();
-        })
-        .then( (comic) => {
-            if (comic.data.results.length > 0) {
-            this.setState({ comic: comic.data.results});
-            } else {
-            this.setState({ comic: ['Searching...'] });
-            }
-        }); 
-        //  debugger;
+    componentWillMount() {
+        const comic = comicJson;
+        this.setState({ comics: comic.data.results})
     }
 
+    // handleOnClick ( url ) {
+
+    //     const comicId = url.substring(url.lastIndexOf('/') + 1);
+ 
+    //     fetch(`${apiUrl}/comics/${comicId}?apikey=${key}&hash=${hash}&ts=${ts}`)
+    //     .then(response => {
+    //         if(response.code >= 400) {
+    //         throw new Error('Bad response from server')
+    //         }
+    //         return response.json();
+    //     })
+    //     .then( (comic) => {
+    //         if (comic.data.results.length > 0) {
+    //         this.setState({ comic: comic.data.results});
+    //         } else {
+    //         this.setState({ comic: ['Searching...'] });
+    //         }
+    //     }); 
+    // }
+
     renderComics() {
-        // debugger;
-        if(this.state !== null && this.state.comic.length > 0 ) {
+        if(this.state !== null && this.state.comics.length > 0 ) {
             
-            const comicThings = this.state.comic.map( comicContainer => {
-                <div> {comicContainer.id}</div>
-            })
-            return comicThings;
+            const comicThings = this.state.comics.title;
+            return <div>{ comicThings }</div>;
         } else {
             return <div> Empty desc for this comic</div>;
         }
         
     } 
-
 
     render() {
         let pathImg = `${this.props.thumbnail.path}.${this.props.thumbnail.extension}`;
@@ -65,11 +68,10 @@ class Hero extends Component {
                         <CollapsibleItem header='View More'>
                             { this.props.comics.items.slice(0, 3).map((comic, i) => {
                                 return (
-                                    <Modal key={i} header={ comic.name } fixedFooter trigger={ <a className="col s6" onClick={this.handleOnClick(comic.resourceURI)}> { comic.name } </a>}>
+                                    <Modal key={i} header={ comic.name } fixedFooter trigger={ <a className="col s6"> { comic.name } </a>}>
                                         <div>
-                                            {this.renderComics()}    
+                                            
                                         </div>
-
                                     </Modal>
                                 ); 
                             }) }
