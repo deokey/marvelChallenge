@@ -69,9 +69,11 @@ class Hero extends Component {
 
                                             <ModalBody 
                                                 if={comicData > 0}
+                                                comicData={comicData}
                                                 id={comicData.id}
                                                 title={comicData.title}
                                                 description={comicData.description}
+                                                price={comicData.prices[0].price}
                                                 imgSrc={`${comicData.thumbnail.path}.${comicData.thumbnail.extension}`|| image404} />
 
                                     </Modal>
