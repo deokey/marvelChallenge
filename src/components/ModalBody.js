@@ -15,29 +15,36 @@ class ModalBody extends PureComponent {
   }
 
   handleOnClick(e) {
-    const { id, imgSrc, title } = this.props;
-    const favorite = {
-      image: imgSrc,
+    const { comicData, id, title, imgSrc } = this.props;
+    const favoriteId = `favorites`;
+    const favoriteData = {
+      id: id,
       title: title,
-      id: id
+      image: imgSrc
     }
     e.preventDefault();
     this.state.clicked ? this.setState({ clicked: false }) : this.setState({ clicked: true });
+
     if(this.state.favorites.length == 0) {
-      console.log('COMIC ADDED TO LS');
-      this.setState({ favorites: this.state.favorites.concat([favorite])});
-      return localStorage.setItem('favorites', { favorites: this.state.favorites});
+
+      this.setState({ favorites: this.state.favorites.concat([comicData])});
+      console.log('COMIC ADDED TO LS', favoriteId, this.state.favorites);
+      localStorage.setItem(favoriteId, this.state.favorites);
+
     } else if(!this.state.clicked) {
-      console.log('COMIC ADDED TO LS');
-      this.setState({ favorites: this.state.favorites.concat([favorite])});
-      return localStorage.setItem('favorites', { favorites: this.state.favorites});
+
+      this.setState({ favorites: this.state.favorites.concat([comicData])});
+      console.log('COMIC ADDED TO LS', favoriteId, this.state.favorites);
+      localStorage.setItem(favoriteId,this.state.favorites);
       
     } else if(this.state.clicked) {
-      console.log('COMIC REMOVED TO LS', this.state.favorites);
+      
       const removeIndex = this.state.favorites.map( item => item.id).indexOf(id);
       ~removeIndex && this.setState({ favorites: this.state.favorites.splice(removeIndex, 1)});
-      localStorage.removeItem('favorites');
-      return localStorage.setItem('favorites', { favorites: this.state.favorites});
+      console.log('COMIC REMOVED TO LS', favoriteId, this.state.favorites);
+      localStorage.removeItem(favoriteId);
+      localStorage.setItem(favoriteId, this.state.favorites);
+
     } else {
       console.warn('Error removing/adding comic to LS');
     }
