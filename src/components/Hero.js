@@ -42,6 +42,7 @@ class Hero extends Component {
     //         }
     //     }); 
     // }
+    
 
     render() {
         const { thumbnail, name, description, comics } = this.props;
@@ -52,12 +53,13 @@ class Hero extends Component {
             <div className="card">
                 <div className="card-image col s6">
                     <img src={pathImg} alt={name} className="circle shadow" />
+                    <h5 className="comic-text related-text">Related Comics</h5>
                 </div>
                 <div className="col s6">
                     <span className="card-title truncate">{name}</span>
-                    <p className="card-description truncate">{description || 'No hero description' }.</p>
+                    <p className="card-description truncate comic-text">{description || 'No hero description' }.</p>
                 </div>
-                <div className="col s12 no-padding">
+                <div className="col s12 no-padding margin-top-3rem">
                     <Collapsible>
                         <CollapsibleItem header='View More'>
                             { comics.items.slice(0, 3).map((comic, i) => {
@@ -65,7 +67,7 @@ class Hero extends Component {
                                     <Modal 
                                         key={i}
                                         header={ <div className="modal-header display-flex justify-end"><img src={ close } alt="modal close button" className="modal-action modal-close"/></div> }
-                                        trigger={ <a className="col s6"> { comic.name } </a>} >
+                                        trigger={ <a className="comic-text"> { comic.name } </a>} >
 
                                             <ModalBody 
                                                 if={comicData > 0}
