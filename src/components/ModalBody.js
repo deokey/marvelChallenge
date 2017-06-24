@@ -9,44 +9,24 @@ class ModalBody extends PureComponent {
     this.handleOnClick = this.handleOnClick.bind(this);
 
     this.state = {
-      favorites : [],
       clicked: false,
     }
   }
-
-  handleOnClick(e) {
-    const { comicData, id, title, imgSrc } = this.props;
-    const favoriteId = `favorites`;
+  handleOnClick() {
+    const { id, title, imgSrc } = this.props;
+    const favoriteId = `favorite${id}`;
     const favoriteData = {
       id: id,
       title: title,
       image: imgSrc
     }
-    e.preventDefault();
     this.state.clicked ? this.setState({ clicked: false }) : this.setState({ clicked: true });
 
-    if(this.state.favorites.length == 0) {
-
-      this.setState({ favorites: this.state.favorites.concat([comicData])});
-      console.log('COMIC ADDED TO LS', favoriteId, this.state.favorites);
-      localStorage.setItem(favoriteId, this.state.favorites);
-
-    } else if(!this.state.clicked) {
-
-      this.setState({ favorites: this.state.favorites.concat([comicData])});
-      console.log('COMIC ADDED TO LS', favoriteId, this.state.favorites);
-      let mamagueva = this.state.favorites;
-     
-      localStorage.setItem(favoriteId, JSON.stringify(this.state.favorites));
-      
+    // 1. if the object is empty or if clicked add to localStorage
+    if(!localStorage.getItem(`favorite${id}`) || !this.state.clicked) {
+      localStorage.setItem(favoriteId, favoriteData);
     } else if(this.state.clicked) {
-      
-      const removeIndex = this.state.favorites.map( item => item.id).indexOf(id);
-      ~removeIndex && this.setState({ favorites: this.state.favorites.splice(removeIndex, 1)});
-      console.log('COMIC REMOVED TO LS', favoriteId, this.state.favorites);
-      // localStorage.removeItem(favoriteId);
-      localStorage.setItem(favoriteId, this.state.favorites);
-
+      localStorage.removeItem(favoriteId);
     } else {
       console.warn('Error removing/adding comic to LS');
     }
@@ -66,7 +46,7 @@ class ModalBody extends PureComponent {
         </div>
         <div className="col s12 no-padding">
           <a href="#" onClick={this.handleOnClick}>
-            {this.state.clicked ? (
+            {this.state.clicked  || localStorage.getItem(`favorite${id}`) ? (
               <div className="col s6 modal-favorited-button">
                 <img src={favouriteButton} className="margin-right-10px" alt="favorite logo"/>Added to favourites
               </div>
