@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import defaultButton from '../../public/assetics/icons/btn-favourites-default.png';
 import shopButton from '../../public/assetics/icons/shopping-cart-primary.png';
 import favouriteButton from '../../public/assetics/icons/btn-favourites-primary.png';
+import defaultButton from '../../public/assetics/icons/btn-favourites-default.png';
 
 class ModalBody extends PureComponent {
   constructor(props) {
@@ -9,13 +9,16 @@ class ModalBody extends PureComponent {
     this.handleOnClick = this.handleOnClick.bind(this);
 
     this.state = {
-      favorites : []
+      favorites : [],
+      clicked: false,
     }
   }
 
-  handleOnClick() {
+  handleOnClick(e) {
     const { comicData } = this.props;
     const id = comicData.id;
+    e.preventDefault();
+    this.state.clicked ? this.setState({ clicked: false }) : this.setState({ clicked: true });
     this.setState({ favorites: this.state.favorites.concat([comicData])});
     localStorage.setItem('favoriteList', this.state.favorites);
   }
@@ -33,7 +36,9 @@ class ModalBody extends PureComponent {
         </div>
         <div className="col s12 no-padding">
           <a href="#" className="col s6 modal-favorite-button" onClick={this.handleOnClick}>
-            <img src={defaultButton} className="margin-right-10px" alt="default logo"/>
+            {this.state.clicked ? (<img src={favouriteButton} className="margin-right-10px" alt="default logo"/>) :
+            <img src={defaultButton} className="margin-right-10px" alt="default logo"/> } 
+            
             To favourites
           </a>
           <a href="#" className="col s6 modal-shop-button">
