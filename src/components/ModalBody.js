@@ -15,17 +15,20 @@ class ModalBody extends PureComponent {
   }
 
   handleOnClick(e) {
-    const { comicData } = this.props;
-    const id = comicData.id;
+    const { id, imgSrc, title } = this.props;
+    const favorite = {
+      image: imgSrc,
+      title: title
+    }
     e.preventDefault();
     this.state.clicked ? this.setState({ clicked: false }) : this.setState({ clicked: true });
     if(this.state.favorites.length == 0) {
       console.log('COMIC ADDED TO LS');
-      this.setState({ favorites: this.state.favorites.concat([comicData])});
+      this.setState({ favorites: this.state.favorites.concat([favorite])});
       return localStorage.setItem('favorites', { favorites: this.state.favorites});
     } else if(!this.state.clicked) {
       console.log('COMIC ADDED TO LS');
-      this.setState({ favorites: this.state.favorites.concat([comicData])});
+      this.setState({ favorites: this.state.favorites.concat([favorite])});
       return localStorage.setItem('favorites', { favorites: this.state.favorites});
       
     } else if(this.state.clicked) {
