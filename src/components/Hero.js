@@ -3,6 +3,7 @@ import { Collapsible, CollapsibleItem, Modal, Button } from 'react-materialize';
 import PropTypes from 'prop-types';
 import comicJson from '../mocks/comic.json';  
 import ModalBody from './ModalBody';
+import close from '../../public/assetics/icons/btn-close.png';
 
 class Hero extends Component {
     constructor(props) {
@@ -63,8 +64,7 @@ class Hero extends Component {
                                 return (
                                     <Modal 
                                         key={i}
-                                        header={ comic.name }
-                                        fixedFooter
+                                        header={ <div className="modal-header display-flex justify-end"><img src={ close } alt="modal close button" className="modal-action modal-close"/></div> }
                                         trigger={ <a className="col s6"> { comic.name } </a>} >
 
                                             <ModalBody 

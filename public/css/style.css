@@ -28,6 +28,14 @@ main {
   max-width: 8rem;
 }
 
+.width-100 {
+  width: 100%;
+}
+
+.no-margin {
+  margin: 0;
+}
+
 .footer-copyright {
   padding: 2rem 0rem !important;
 }
@@ -58,6 +66,10 @@ main {
 
 .justify-space {
   justify-content: space-around;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .card {
@@ -134,3 +146,75 @@ main {
     -webkit-tap-highlight-color: transparent;
 }
 
+.collapsible-body {
+  padding: 0;
+  border: 0;
+}
+
+
+.modal {
+  background-color: white;
+}
+
+
+.modal-footer {
+  display: none;
+}
+
+.modal-close {
+   padding: 1rem;
+}
+
+.modal .modal-content {
+  padding: 0;
+  overflow: hidden;
+}
+
+.modal-favorite-button {
+  height: 70px;
+  width: 50%;
+  background-color: #F0F0F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3D3332;
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: 0.4s;
+}
+
+.modal-favorite-button:hover {
+  background-color: rgba(50, 40, 39, 0.7);
+}
+
+.modal-favorited-button {
+  height: 70px;
+  width: 50%;
+  background-color: #322827;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.modal-shop-button {
+  height: 70px;
+  width: 50%;
+  background-color: #DCDCDC;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.margin-right-10px {
+  margin-right: 10px;
+}
+
+.margin-bot-1rem {
+  margin-bottom: 1rem;
+}
