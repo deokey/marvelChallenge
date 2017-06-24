@@ -18,7 +18,8 @@ class ModalBody extends PureComponent {
     const { id, imgSrc, title } = this.props;
     const favorite = {
       image: imgSrc,
-      title: title
+      title: title,
+      id: id
     }
     e.preventDefault();
     this.state.clicked ? this.setState({ clicked: false }) : this.setState({ clicked: true });
