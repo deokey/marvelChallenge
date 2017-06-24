@@ -18,6 +18,7 @@
   "homepage": "https://github.com/deokey/marvelChallenge#readme",
   "dependencies": {
     "babel-eslint": "^7.2.3",
+    "flux": "^3.1.2",
     "path": "^0.12.7",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",

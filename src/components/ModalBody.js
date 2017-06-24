@@ -4,6 +4,7 @@ import favouriteButton from '../../public/assetics/icons/btn-favourites-primary.
 import defaultButton from '../../public/assetics/icons/btn-favourites-default.png';
 
 class ModalBody extends PureComponent {
+
   constructor(props) {
     super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
@@ -12,8 +13,19 @@ class ModalBody extends PureComponent {
       clicked: false,
     }
   }
+
+  componentDidMount() {
+    dispatcher.register( dispatch => {
+        if( dispatch.type === 'removeComic') {
+            this.setState({ clicked: false })
+        } else if( dispatch.type === 'addComic') {
+            this.setState({ clicked: true })
+        }
+    })
+  }
+
   handleOnClick() {
-    const { id, title, imgSrc } = this.props;
+    const { id, title, imgSrc, dispatcher } = this.props;
 
     const favoriteData = {
       id: id,
@@ -26,8 +38,15 @@ class ModalBody extends PureComponent {
     // 1. if the object is empty or if clicked add to localStorage
     if(!localStorage.getItem(id) || !this.state.clicked) {
       localStorage.setItem(id, JSON.stringify(favoriteData));
+      dispatcher.dispatch({
+        type: 'addComic'
+      });
     } else if(this.state.clicked) {
       localStorage.removeItem(id);
+
+      dispatcher.dispatch({
+        type: 'removeComic'
+      });
     } else {
       console.warn('Error removing/adding comic to LS');
     }

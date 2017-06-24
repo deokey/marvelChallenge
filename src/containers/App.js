@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
+import { Dispatcher } from 'flux';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
 import Comic from '../components/Comic';
 import { key , hash , apiUrl , limit , ts } from '../api';
 import characterIcon from '../../public/assetics/icons/characters.png';
 import favoritesIcon from '../../public/assetics/icons/favourites.png';
-import characterJson from '../mocks/characters.json'; 
+import characterJson from '../mocks/characters.json';
+
+const dispatcher = new Dispatcher;
 
 class App extends Component {
 
@@ -14,13 +17,24 @@ class App extends Component {
 
         this.state = {
             search: '',
-            characters: []
+            characters: [],
+            renderChilds: false
         };
 
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnClick = this.handleOnClick.bind(this);
         // this.handleOnSelect = this.handleOnSelect.bind(this);
         // this.handleUnSelected = this.handleUnSelected.bind(this);
+    }
+
+    componentDidMount() {
+        dispatcher.register( dispatch => {
+            if( dispatch.type === 'removeComic') {
+                this.setState({ renderChilds: true})
+            } else if( dispatch.type === 'addComic') {
+                this.setState({ renderChilds: true })
+            }
+        })
     }
 
     handleOnChange(event) {
@@ -65,6 +79,7 @@ class App extends Component {
             const characterComponent = characters.map((character) => 
                 <Hero 
                 key={character.id}
+                dispatcher={dispatcher}
                 name={character.name}
                 description={character.description}
                 thumbnail={character.thumbnail}
@@ -87,6 +102,7 @@ class App extends Component {
             return (
                 <Comic
                     key={comic.id}
+                    dispatcher={dispatcher}
                     id={comic.id}
                     imgSrc={comic.imgSrc}
                     title={comic.title}

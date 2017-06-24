@@ -8,13 +8,15 @@ class Comic extends PureComponent {
   }
 
   handleDelete() {
-    const idComic = this.props.id;
-    localStorage.removeItem(idComic);
-    return <div className='hidden' > I DONT EXIST</div>
+    const { id, dispatcher } = this.props;
+    localStorage.removeItem(id);
+    dispatcher.dispatch({
+      type: 'removeComic'
+    });
   }
 
   render() {
-    const { imgSrc, title, handler } = this.props;
+    const { imgSrc, title } = this.props;
     return(
       <div className="display-flex align-center justify-center flex-wrap position-relative margin-top-1rem">
         <img className="width-100" src={imgSrc} alt="comic image"/>

@@ -45,7 +45,7 @@ class Hero extends Component {
     
 
     render() {
-        const { thumbnail, name, description, comics } = this.props;
+        const { thumbnail, name, description, comics, dispatcher } = this.props;
         let pathImg = `${thumbnail.path}.${thumbnail.extension}`;
         const image404 = 'https://www.1and1.es/digitalguide/fileadmin/DigitalGuide/Teaser/not-found-t.jpg';
         const comicData = this.state.comicData[0];
@@ -71,6 +71,7 @@ class Hero extends Component {
 
                                             <ModalBody 
                                                 if={comicData > 0}
+                                                dispatcher={dispatcher}
                                                 comicData={comicData}
                                                 id={comicData.id}
                                                 title={comicData.title}
