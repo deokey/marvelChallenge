@@ -19,8 +19,22 @@ class ModalBody extends PureComponent {
     const id = comicData.id;
     e.preventDefault();
     this.state.clicked ? this.setState({ clicked: false }) : this.setState({ clicked: true });
-    this.setState({ favorites: this.state.favorites.concat([comicData])});
-    localStorage.setItem('favoriteList', this.state.favorites);
+    if(this.state.favorites.length == 0) {
+      this.setState({ favorites: this.state.favorites.concat([comicData])});
+      localStorage.setItem('favorites', { favorites: this.state.favorites});
+    } else if(!this.state.clicked) {
+        this.setState({ favorites: this.state.favorites.concat([comicData])});
+        localStorage.setItem('favorites', { favorites: this.state.favorites});
+      
+    } else if(this.state.clicked) {
+      console.log('BORRANDO', this.state.favorites);
+      const removeIndex = this.state.favorites.map( item => item.id).indexOf(id);
+      ~removeIndex && this.setState({ favorites: this.state.favorites.splice(removeIndex, 1)});
+      localStorage.removeItem('favorites');
+      localStorage.setItem('favorites', { favorites: this.state.favorites});
+      console.log('Nuevos Favoritos', this.state.favorites);
+    }
+    
   }
 
   render() {
