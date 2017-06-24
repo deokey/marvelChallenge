@@ -17,7 +17,7 @@ class ModalBody extends PureComponent {
         </div>
         <div className="col s8 margin-bot-1rem">
           <h4 className="bold">{title}</h4>
-          {description}
+           <div dangerouslySetInnerHTML={{ __html: description }} ></div>
         </div>
         <div className="col s12 no-padding">
           <a href="#" className="col s6 modal-favorite-button"><img src={defaultButton} className="margin-right-10px" alt="default logo"/>To favourites</a>
