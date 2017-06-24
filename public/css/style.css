@@ -44,6 +44,16 @@ main {
   background-color: #EBEBEB ;
 }
 
+.position-relative {
+  position: relative;
+}
+
+.thrasher {
+  position: absolute;
+  top: -12px;
+  right: -12px;
+}
+
 .display-flex {
   display: flex;
 }
@@ -81,6 +91,10 @@ main {
 
 .card:nth-child(1), .card:nth-child(2) {
   margin-top: 2rem !important;
+}
+
+.margin-top-1rem {
+  margin-top:  1rem;
 }
 
 .margin-top-3rem {

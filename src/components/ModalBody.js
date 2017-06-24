@@ -34,11 +34,10 @@ class ModalBody extends PureComponent {
     } else if(!this.state.clicked) {
 
       this.setState({ favorites: this.state.favorites.concat([comicData])});
-      console.log('COMIC ADDED TO LS', favoriteId, this.state.favorites);
-      let mamagueva = this.state.favorites;
+      console.log('COMIC ADDED TO LS 1', favoriteId, this.state.favorites);
      
       localStorage.setItem(favoriteId, JSON.stringify(this.state.favorites));
-      
+
     } else if(this.state.clicked) {
       
       const removeIndex = this.state.favorites.map( item => item.id).indexOf(id);

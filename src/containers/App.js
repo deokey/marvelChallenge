@@ -5,6 +5,7 @@ import { key , hash , apiUrl , limit , ts } from '../api';
 import characterIcon from '../../public/assetics/icons/characters.png';
 import favoritesIcon from '../../public/assetics/icons/favourites.png';
 import characterJson from '../mocks/characters.json'; 
+import thrasher from '../../public/assetics/icons/btn-delete.png';
 
 class App extends Component {
 
@@ -19,6 +20,7 @@ class App extends Component {
 
         this.handleOnChange = this.handleOnChange.bind(this);
         this.handleOnClick = this.handleOnClick.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         // this.handleOnSelect = this.handleOnSelect.bind(this);
         // this.handleUnSelected = this.handleUnSelected.bind(this);
     }
@@ -80,14 +82,26 @@ class App extends Component {
         }
     }
 
+    handleDelete() {
+        let favor = JSON.parse( localStorage.getItem('favorites'));
+        console.log(favor);
+        const removeIndex = favor.map( item => item.id).indexOf(id);
+        ~removeIndex &&  localStorage.setItem(favoriteId, this.state.favorites);
+        console.log('COMIC REMOVED TO LSasas',  localStorage.setItem(favoriteId, this.state.favorites));
+        // localStorage.removeItem(favoriteId);
+        localStorage.setItem(favoriteId, this.state.favorites);
+
+    }
+
     renderFavorites() {
         let favor = JSON.parse( localStorage.getItem('favorites'));
         if(favor && favor.length > 0){
             const favorites = favor.map( (favorite) => {
                 return (
-                    <div>
-                        <img src={`${favorite.thumbnail.path}.${favorite.thumbnail.extension}`} alt="comic image"/>
-                        <label htmlFor="">{favorite.title}</label>
+                    <div key={favorite.id} className="display-flex align-center justify-center flex-wrap position-relative margin-top-1rem">
+                        <img className="width-100" src={`${favorite.thumbnail.path}.${favorite.thumbnail.extension}`} alt="comic image"/>
+                        <h5 className="bold">{favorite.title}</h5>
+                        <img className="thrasher" src={thrasher} onClick={ this.handleDelete } alt="delete"/>
                     </div>
                 );
             });
@@ -125,7 +139,7 @@ class App extends Component {
                         </div>
 
                         <div id="side" className="col s12 m3">
-                            <div className="display-flex align-center justify-center main-container">
+                            <div className="display-flex align-center justify-center main-container flex-wrap">
                                 <img src={ favoritesIcon } className="margin-right-10px" alt=""/>
                                 <h4>My Favourites</h4>
 
