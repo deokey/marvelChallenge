@@ -20,19 +20,22 @@ class ModalBody extends PureComponent {
     e.preventDefault();
     this.state.clicked ? this.setState({ clicked: false }) : this.setState({ clicked: true });
     if(this.state.favorites.length == 0) {
+      console.log('COMIC ADDED TO LS');
       this.setState({ favorites: this.state.favorites.concat([comicData])});
-      localStorage.setItem('favorites', { favorites: this.state.favorites});
+      return localStorage.setItem('favorites', { favorites: this.state.favorites});
     } else if(!this.state.clicked) {
-        this.setState({ favorites: this.state.favorites.concat([comicData])});
-        localStorage.setItem('favorites', { favorites: this.state.favorites});
+      console.log('COMIC ADDED TO LS');
+      this.setState({ favorites: this.state.favorites.concat([comicData])});
+      return localStorage.setItem('favorites', { favorites: this.state.favorites});
       
     } else if(this.state.clicked) {
-      console.log('BORRANDO', this.state.favorites);
+      console.log('COMIC REMOVED TO LS', this.state.favorites);
       const removeIndex = this.state.favorites.map( item => item.id).indexOf(id);
       ~removeIndex && this.setState({ favorites: this.state.favorites.splice(removeIndex, 1)});
       localStorage.removeItem('favorites');
-      localStorage.setItem('favorites', { favorites: this.state.favorites});
-      console.log('Nuevos Favoritos', this.state.favorites);
+      return localStorage.setItem('favorites', { favorites: this.state.favorites});
+    } else {
+      console.warn('Error removing/adding comic to LS');
     }
     
   }
