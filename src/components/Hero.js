@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Collapsible, CollapsibleItem, Modal, Button } from 'react-materialize';
+import PropTypes from 'prop-types';
 import comicJson from '../mocks/comic.json';  
+import ModalBody from './ModalBody';
 
 class Hero extends Component {
     constructor(props) {
@@ -8,17 +10,16 @@ class Hero extends Component {
 
         this.state = {
             card: {
-                comicsId: this.props.comicsId ,
+                comicsId: this.props.comicsId,
             }
         };
 
         // this.handleOnClick = this.handleOnClick.bind(this);
-        this.renderComics = this.renderComics.bind(this);
     }
     
     componentWillMount() {
         const comic = comicJson;
-        this.setState({ comics: comic.data.results})
+        this.setState({ comicData: comic.data.results})
     }
 
     // handleOnClick ( url ) {
@@ -41,37 +42,38 @@ class Hero extends Component {
     //     }); 
     // }
 
-    renderComics() {
-        if(this.state !== null && this.state.comics.length > 0 ) {
-            
-            const comicThings = this.state.comics.title;
-            return <div>{ comicThings }</div>;
-        } else {
-            return <div> Empty desc for this comic</div>;
-        }
-        
-    } 
-
     render() {
-        let pathImg = `${this.props.thumbnail.path}.${this.props.thumbnail.extension}`;
+        const { thumbnail, name, description, comics } = this.props;
+        let pathImg = `${thumbnail.path}.${thumbnail.extension}`;
+        const image404 = 'https://www.1and1.es/digitalguide/fileadmin/DigitalGuide/Teaser/not-found-t.jpg';
+        const comicData = this.state.comicData[0];
         return (
             <div className="card">
                 <div className="card-image col s6">
-                    <img src={pathImg} alt={this.props.name} className="circle shadow" />
+                    <img src={pathImg} alt={name} className="circle shadow" />
                 </div>
                 <div className="col s6">
-                    <span className="card-title truncate">{this.props.name}</span>
-                    <p className="card-description truncate">{this.props.description || 'No hero description' }.</p>
+                    <span className="card-title truncate">{name}</span>
+                    <p className="card-description truncate">{description || 'No hero description' }.</p>
                 </div>
                 <div className="col s12 no-padding">
                     <Collapsible>
                         <CollapsibleItem header='View More'>
-                            { this.props.comics.items.slice(0, 3).map((comic, i) => {
+                            { comics.items.slice(0, 3).map((comic, i) => {
                                 return (
-                                    <Modal key={i} header={ comic.name } fixedFooter trigger={ <a className="col s6"> { comic.name } </a>}>
-                                        <div>
-                                            
-                                        </div>
+                                    <Modal 
+                                        key={i}
+                                        header={ comic.name }
+                                        fixedFooter
+                                        trigger={ <a className="col s6"> { comic.name } </a>} >
+
+                                            <ModalBody 
+                                                if={comicData > 0}
+                                                id={comicData.id}
+                                                title={comicData.title}
+                                                description={comicData.description}
+                                                imgSrc={`${comicData.thumbnail.path}.${comicData.thumbnail.extension}`|| image404} />
+
                                     </Modal>
                                 ); 
                             }) }
@@ -82,6 +84,13 @@ class Hero extends Component {
             </div>   
         );
     }
+}
+
+Hero.propTypes = {
+    name: PropTypes.string.isRequired,
+    thumbnail: PropTypes.object.isRequired,
+    description: PropTypes.string.isRequired,
+    comics: PropTypes.object.isRequired
 }
 
 export default Hero;

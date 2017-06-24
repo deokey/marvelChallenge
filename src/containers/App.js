@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import { key , hash , apiUrl , limit , ts } from '../api';
 import characterIcon from '../../public/assetics/icons/characters.png';
 import favoritesIcon from '../../public/assetics/icons/favourites.png';
-import characterJson from '../mocks/characters.json';  
+import characterJson from '../mocks/characters.json'; 
 
 class App extends Component {
 
@@ -14,11 +14,7 @@ class App extends Component {
         this.state = {
             search: '',
             characters: [],
-            comics: [],
-            cardSelected: {
-                isSelected: false,
-                characterId: ''
-            }
+            comics: []
         };
 
         this.handleOnChange = this.handleOnChange.bind(this);
@@ -61,24 +57,10 @@ class App extends Component {
         // }
     }
 
-    // handleOnSelect(event) {
-    //     event.preventDefault();
-    //     this.setState({ cardSelected: { isSelected: true } });
-    // }
-
-    // handleUnSelected(id) {
-    //      this.setState({ cardSelected:
-    //           { 
-    //               isSelected: this.state.cardSelected.isSelected,
-    //               characterId: id
-    //            }
-    //          });
-    // }
-
     renderCharacters() {
 
         const characters = this.state.characters;
-        console.log(characters);
+        // console.log(characters);
         if(characters.length > 0) {
             const characterComponent = characters.map((character) => 
                 <Hero 
