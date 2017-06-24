@@ -49,12 +49,18 @@ class ModalBody extends PureComponent {
            <div dangerouslySetInnerHTML={{ __html: description }} ></div>
         </div>
         <div className="col s12 no-padding">
-          <a href="#" className="col s6 modal-favorite-button" onClick={this.handleOnClick}>
-            {this.state.clicked ? (<img src={favouriteButton} className="margin-right-10px" alt="default logo"/>) :
-            <img src={defaultButton} className="margin-right-10px" alt="default logo"/> } 
-            
-            To favourites
+          <a href="#" onClick={this.handleOnClick}>
+            {this.state.clicked ? (
+              <div className="col s6 modal-favorited-button">
+                <img src={favouriteButton} className="margin-right-10px" alt="favorite logo"/>Added to favourites
+              </div>
+              ) : 
+              <div className="col s6 modal-favorite-button">
+                <img src={defaultButton} className="margin-right-10px" alt="default logo"/>Add to favourites
+              </div> 
+            } 
           </a>
+
           <a href="#" className="col s6 modal-shop-button">
             <img src={shopButton} className="margin-right-10px" alt="shop logo"/>
             Buy for ${price}
