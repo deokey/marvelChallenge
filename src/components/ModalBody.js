@@ -14,19 +14,20 @@ class ModalBody extends PureComponent {
   }
   handleOnClick() {
     const { id, title, imgSrc } = this.props;
-    const favoriteId = `favorite${id}`;
+
     const favoriteData = {
       id: id,
       title: title,
-      image: imgSrc
+      imgSrc: imgSrc
     }
+
     this.state.clicked ? this.setState({ clicked: false }) : this.setState({ clicked: true });
 
     // 1. if the object is empty or if clicked add to localStorage
-    if(!localStorage.getItem(`favorite${id}`) || !this.state.clicked) {
-      localStorage.setItem(favoriteId, favoriteData);
+    if(!localStorage.getItem(id) || !this.state.clicked) {
+      localStorage.setItem(id, JSON.stringify(favoriteData));
     } else if(this.state.clicked) {
-      localStorage.removeItem(favoriteId);
+      localStorage.removeItem(id);
     } else {
       console.warn('Error removing/adding comic to LS');
     }

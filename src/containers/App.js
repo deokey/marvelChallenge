@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Hero from '../components/Hero';
 import Footer from '../components/Footer';
+import Comic from '../components/Comic';
 import { key , hash , apiUrl , limit , ts } from '../api';
 import characterIcon from '../../public/assetics/icons/characters.png';
 import favoritesIcon from '../../public/assetics/icons/favourites.png';
@@ -13,8 +14,7 @@ class App extends Component {
 
         this.state = {
             search: '',
-            characters: [],
-            comics: []
+            characters: []
         };
 
         this.handleOnChange = this.handleOnChange.bind(this);
@@ -81,19 +81,21 @@ class App extends Component {
     }
 
     renderFavorites() {
-        let favor = JSON.parse( localStorage.getItem('favorites'));
-        if(favor && favor.length > 0){
-            const favorites = favor.map( (favorite) => {
-                return (
-                    <div>
-                        <img src={`${favorite.thumbnail.path}.${favorite.thumbnail.extension}`} alt="comic image"/>
-                        <label htmlFor="">{favorite.title}</label>
-                    </div>
-                );
-            });
-            return favorites;
-        } else {
-            return <span>Empty Favourites...</span>;
+        for (const id in localStorage) {
+            const comic = JSON.parse(localStorage[id]);
+            if(comic) {
+            return (
+                <Comic
+                    key={comic.id}
+                    id={comic.id}
+                    imgSrc={comic.imgSrc}
+                    title={comic.title}
+                />
+            );
+            
+            } else {
+                return <span>Empty Favourites...</span>;
+            }
         }
     }
 
@@ -125,7 +127,7 @@ class App extends Component {
                         </div>
 
                         <div id="side" className="col s12 m3">
-                            <div className="display-flex align-center justify-center main-container">
+                            <div className="display-flex align-center justify-center main-container flex-wrap">
                                 <img src={ favoritesIcon } className="margin-right-10px" alt=""/>
                                 <h4>My Favourites</h4>
 
