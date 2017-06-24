@@ -80,6 +80,23 @@ class App extends Component {
         }
     }
 
+    renderFavorites() {
+        let favor = JSON.parse( localStorage.getItem('favorites'));
+        if(favor && favor.length > 0){
+            const favorites = favor.map( (favorite) => {
+                return (
+                    <div>
+                        <img src={`${favorite.thumbnail.path}.${favorite.thumbnail.extension}`} alt="comic image"/>
+                        <label htmlFor="">{favorite.title}</label>
+                    </div>
+                );
+            });
+            return favorites;
+        } else {
+            return <span>Empty Favourites...</span>;
+        }
+    }
+
     render() {
         return (
             <main>
@@ -97,7 +114,7 @@ class App extends Component {
                 </nav>
                 <section id="main" className="section no-padding">
                     <div className="container">
-                    <div className="row">
+                    <div className="row no-margin">
                         
                         <div className="col s12 m9 no-padding display-flex flex-wrap justify-space">
                             <div className="col s12 display-flex align-center main-container">
@@ -107,10 +124,13 @@ class App extends Component {
                             { this.renderCharacters() }
                         </div>
 
-                        <div className="col s12 m3 favorites-col">
-                            <div className="display-flex align-center  main-container">
-                                <img src={ favoritesIcon } alt=""/>
+                        <div id="side" className="col s12 m3">
+                            <div className="display-flex align-center justify-center main-container">
+                                <img src={ favoritesIcon } className="margin-right-10px" alt=""/>
                                 <h4>My Favourites</h4>
+
+                                { this.renderFavorites() }
+
                             </div>
                         </div>
                     </div>
