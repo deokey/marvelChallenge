@@ -73,7 +73,8 @@ main {
 }
 
 .card {
-  width: 45%;
+  width: 27rem;
+  margin: 0 10px;
   margin-bottom: 3rem !important; 
   margin-top: 2rem !important;
 }
@@ -82,6 +83,22 @@ main {
   margin-top: 2rem !important;
 }
 
+.margin-top-3rem {
+  margin-top:  3rem;
+}
+
+.card-description.truncate {
+    display: block;
+    white-space: normal;
+    max-height: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.related-text {
+    position: relative;
+    top: 52px;
+}
 
 .card-title {
   font-weight: bolder !important;
@@ -121,6 +138,10 @@ main {
   border: none !important;
 }
 
+.collapsible-body {
+  padding: 0.8rem;
+}
+
 .collapsible-header {
     position: relative;
     width: 10rem;
@@ -147,7 +168,6 @@ main {
 }
 
 .collapsible-body {
-  padding: 0;
   border: 0;
 }
 
@@ -217,4 +237,18 @@ main {
 
 .margin-bot-1rem {
   margin-bottom: 1rem;
+}
+
+.comic-text {
+  color: #796F6E;
+  display: block;
+}
+
+.collapsible-body .comic-text:hover {
+  color: red;
+  display: block;
+  cursor: pointer;
+  background-image: url('../assetics/icons/link-arrow.png');
+  background-repeat: no-repeat;
+  padding-left: 25px;
 }

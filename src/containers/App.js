@@ -99,7 +99,7 @@ class App extends Component {
                     <div className="container">
                     <div className="row">
                         
-                        <div className="col s12 m9 no-padding display-flex flex-wrap justify-between">
+                        <div className="col s12 m9 no-padding display-flex flex-wrap justify-space">
                             <div className="col s12 display-flex align-center main-container">
                                 <img src={ characterIcon } alt=""/>
                                 <h3 className="no-margin">Characters</h3>
