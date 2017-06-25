@@ -44,31 +44,31 @@ class App extends Component {
 
     handleOnClick() {
         //for testing
-        const value = characterJson;
-        this.setState({ characters: value.data.results})
+        // const value = characterJson;
+        // this.setState({ characters: value.data.results})
         
         
 
         //for production
-        // const value = this.state.search;
+        const value = this.state.search;
 
-        // if( value !== '' || value !== null ) {
+        if( value !== '' || value !== null ) {
 
-        //     fetch(`${apiUrl}/characters?nameStartsWith=${value}&limit=${limit}&apikey=${key}&hash=${hash}&ts=${ts}`)
-        //     .then(response => {
-        //         if(response.code >= 400) {
-        //             throw new Error('Bad response from server')
-        //         }
-        //         return response.json();
-        //     })
-        //     .then( (characters) => {
-        //         if (characters.data.results.length > 0) {
-        //             this.setState({ characters: characters.data.results})
-        //         } else {
-        //             this.setState({ characters: ['Searching...'] })
-        //         }
-        //     });
-        // }
+            fetch(`${apiUrl}/characters?nameStartsWith=${value}&limit=${limit}&apikey=${key}&hash=${hash}&ts=${ts}`)
+            .then(response => {
+                if(response.code >= 400) {
+                    throw new Error('Bad response from server')
+                }
+                return response.json();
+            })
+            .then( (characters) => {
+                if (characters.data.results.length > 0) {
+                    this.setState({ characters: characters.data.results})
+                } else {
+                    this.setState({ characters: ['Searching...'] })
+                }
+            });
+        }
     }
 
     renderCharacters() {

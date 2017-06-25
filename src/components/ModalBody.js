@@ -15,7 +15,7 @@ class ModalBody extends PureComponent {
   }
 
   componentDidMount() {
-    dispatcher.register( dispatch => {
+    this.props.dispatcher.register( dispatch => {
         if( dispatch.type === 'removeComic') {
             this.setState({ clicked: false })
         } else if( dispatch.type === 'addComic') {
